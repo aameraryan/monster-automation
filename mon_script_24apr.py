@@ -191,7 +191,7 @@ def get_page(no_of_pages):
             else:
                 print('Duplicate -> ', my_dict)
             if ((r_index / len(resumes))*100) % 25 == 0:
-                print("{} %".format((r_index / len(resumes))*100) % 25)
+                print("\t{} %".format((r_index / len(resumes))*100))
 
         next_page = page_number + 1
         try:
@@ -311,7 +311,7 @@ def get_page_folder(no_of_pages):
             else:
                 print('Duplicate -> ', my_dict)
             if ((r_index / len(resumes))*100) % 25 == 0:
-                print("{} %".format((r_index / len(resumes))*100) % 25)
+                print("\t{} %".format((r_index / len(resumes))*100))
 
         next_page = page_number + 1
         try:
