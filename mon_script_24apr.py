@@ -4,6 +4,7 @@ import time
 from selenium.webdriver.common.keys import Keys
 import csv
 import datetime
+import os
 
 
 def get_profiles():
@@ -18,7 +19,7 @@ def get_profiles():
     p_writer.writeheader()
     p_reader = csv.DictReader(p_csv_file)
     time.sleep(2)
-    for row in p_reader:
+    for row_index, row in enumerate(p_reader):
         link = row.get('link')
         driver.get(link)
         try:
@@ -54,6 +55,11 @@ def get_profiles():
         except Exception as e:
             print('main exception : ', e)
             p_errors += 1
+        try:
+            if row_index % 50 == 0:
+                print("\t profile - {}".format(row_index))
+        except Exception as e:
+            print(e)
     time.sleep(2)
     print('Total Errors : ', p_errors)
 
@@ -378,4 +384,9 @@ except:
 time.sleep(2)
 
 driver.close()
+try:
+    os.rmdir(base_path+file_name + '-{}.csv'.format(datetime.date.today()))
+except Exception as e:
+    print(e)
+    print('previous file cannot be deleted')
 print('Total Errors : ', errors)
